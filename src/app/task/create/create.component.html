@@ -1,0 +1,58 @@
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h2>Create Task</h2>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Task Name</label>
+            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && t.name.errors }" />
+            <div *ngIf="submitted && t.name.errors" class="invalid-feedback">
+                <div *ngIf="t.name.errors.required">Task Name is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && t.description.errors }" />
+            <div *ngIf="submitted && t.description.errors" class="invalid-feedback">
+                <div *ngIf="t.description.errors.required">Description is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="startTime">Start Time</label>
+          <input type="date" [value]="t.startTime.value | date: 'yyyy-MM-dd'" formControlName="startTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && t.startTime.errors }" />
+          <div *ngIf="submitted && t.startTime.errors" class="invalid-feedback">
+              <div *ngIf="t.startTime.errors.required">Start Time is required</div>
+          </div>
+      </div>
+    
+      <div class="form-group">
+        <label for="endTime">End Time</label>
+        <input type="date" [value]="t.endTime.value | date: 'yyyy-MM-dd'" formControlName="endTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && t.endTime.errors }" />
+        <div *ngIf="submitted && t.endTime.errors" class="invalid-feedback">
+            <div *ngIf="t.endTime.errors.required">End Time is required</div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="assignUserId">Assign To</label>
+      <select formControlName="assignUserId" class="form-control" [ngClass]="{ 'is-invalid': submitted && t.assignUserId.errors }">
+        <option value="" [disabled]=true >Select User</option>
+        <option *ngFor="let user of users" [value]="user.id" [selected]="user.id == t.assignUserId.value">
+            {{user.firstName}} {{user.lastName}}
+        </option>
+      </select>
+      <div *ngIf="submitted && t.assignUserId.errors" class="invalid-feedback">
+          <div *ngIf="t.assignUserId.errors.required">Assign User is required</div>
+      </div>
+    </div>
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Add
+            </button>
+            <a routerLink="/task" class="btn btn-link">Back To Task List</a>
+        </div>
+    </form>
+    
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<h4>Assign Task List</h4>
+<table class="table">
+  <tbody>
+    <th>Task Name</th>
+  </tbody>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>{{task.name}}</td>
+    </tr>
+    <tr *ngIf="tasks.length == 0">
+      <td>No Assign Task Here</td>
+    </tr>
+  </tbody>
+</table>

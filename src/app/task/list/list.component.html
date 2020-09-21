@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <a routerLink="/task/create" class="btn btn-link">Create Task</a>
+    <table class="table">
+      <thead>
+        <th>Task Name</th>
+        <th>Description</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{task.name}}</td>
+          <td>{{task.description}}</td>
+          <td>{{task.startTime | date}}</td>
+          <td>{{task.endTime | date}}</td>
+          <td style="display: flex;">
+            <a [routerLink]="['/task/edit', task.id]" class="btn btn-link">Edit</a>
+            <a [routerLink]="" (click)="delete(task.id)" class="btn btn-link">Delete</a>
+          </td>
+        </tr>
+        <tr *ngIf="tasks.length == 0">
+          <td colspan="5">No Task Here</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
